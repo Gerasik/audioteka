@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './audiolist.module.scss';
 
-const AudioList = ({ audioListData }) => (
+const AudioList = ({ audioListData, sortAction }) => (
   <table className={styles.table}>
     <thead>
-      <tr>
+      <tr onClick={sortAction}>
         <th>Singer</th>
         <th>Song</th>
         <th>Ganre</th>
@@ -13,7 +13,7 @@ const AudioList = ({ audioListData }) => (
     </thead>
     <tbody>
       {
-        audioListData.slice(0, 5).map((item) => (
+        audioListData.slice(0, 50).map((item) => (
           <tr key={item.id}>
             <td>{item.singer}</td>
             <td>{item.song}</td>

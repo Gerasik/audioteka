@@ -40,6 +40,11 @@ class App extends Component {
 
     this.state = {
       currentList: soundList,
+      sortby: {
+        type: null,
+        order: null,
+      },
+      sort: null,
     };
   }
 
@@ -52,6 +57,42 @@ class App extends Component {
     }
   }
 
+  sortAction(event) {
+    let sortBy;
+    switch (event.target.innerText) {
+      case 'Singer':
+        sortBy = 'singer';
+        break;
+      case 'Song':
+        sortBy = 'song';
+        break;
+      case 'Ganre':
+        sortBy = 'ganre';
+        break;
+      case 'Year':
+        sortBy = 'year';
+        break;
+      default:
+        sortBy = null;
+        break;
+    }
+    const { currentList, sort } = this.state;
+    // let sortedList;
+    if (sortBy !== sort) {
+      const sortedList = currentList.sort((a, b) => {
+        const textA = a[sortBy];
+        const textB = b[sortBy];
+        if (textA < textB) return -1;
+        if (textA > textB) return 1;
+        return 0;
+      });
+      this.setState({ currentList: sortedList, sort: sortBy });
+    } else if (sortBy === sort) {
+      const sortedList = currentList.reverse();
+      this.setState({ currentList: sortedList });
+    }
+  }
+
   render() {
     function getUnique(arr, attr) {
       const result = [];
@@ -60,7 +101,10 @@ class App extends Component {
           result.push(str[attr]);
         }
       }
-      return result.sort();
+      return result.sort().map((item, id) => ({
+        id,
+        item,
+      }));
     }
     const singers = getUnique(soundList, 'singer');
     const ganres = getUnique(soundList, 'ganre');
@@ -68,7 +112,7 @@ class App extends Component {
     const { currentList } = this.state;
     return (
       <div className={styles.main}>
-        <AudioList audioListData={currentList} />
+        <AudioList audioListData={currentList} sortAction={(e) => this.sortAction(e)} />
         <div className={styles.filters}>
           <p>Singer:</p>
           <Filter name="singer" data={singers} action={(e) => this.filterByType(e)} />

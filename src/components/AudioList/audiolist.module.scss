@@ -3,10 +3,21 @@
 .table{
     padding-right: 20px;
     width: 70%;
-    tr:nth-child(2n+1){
-        background-color: $mainBgc;
-    }
-    td{
-        padding: 5px;
+    tr{
+        &:nth-child(2n+1){
+            background-color: $mainBgc;
+        }
+        td{
+            padding: 5px;
+            &:first-of-type{
+                width: 280px;
+            }
+            &:nth-child(2){
+                width: 150px;
+            }
+            &:last-of-type{
+                width: 45px;
+            }
+        }
     }
 }
