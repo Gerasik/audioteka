@@ -1,3 +1,7 @@
-._wrap{
-    background-color: red;
+@import "../../variables";
+
+.item{
+    font-size: 1em;
+    padding: 5px;
+    border: 1px solid $mainColor;
 }

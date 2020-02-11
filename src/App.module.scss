@@ -1,0 +1,18 @@
+@import "./variables";
+
+.main{
+  display: flex;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.filters{
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+  p{
+    margin: 10px 0;
+    font-weight: bold;
+    color: $mainColor;
+  }
+}
