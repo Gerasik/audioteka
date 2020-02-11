@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import AudioList from './components/AudioList/AudioList'
+import Filter from './components/Filter/Filter';
 import soundList from './data/csvjson.json'
 
 function App() {
@@ -17,19 +19,7 @@ function App() {
   const years = getUnique(soundList, 'year');
   return (
     <div className="App">
-      <table>
-        {
-          soundList.map((item)=>
-            <tr key={item.id}>
-              <td>{item.singer}</td>
-              <td>{item.song}</td>
-              <td>{item.ganre}</td>
-              <td>{item.year}</td>
-            </tr>
-          )
-        }
-      </table>
-      <ul>
+      {/* <ul>
         {singers.map(item=> <li>{item}</li>)}
       </ul>
       <ul>
@@ -37,12 +27,12 @@ function App() {
       </ul>
       <ul>
         {years.map(item=> <li>{item}</li>)}
-      </ul>
+      </ul> */}
       {/* <select onChange={this.handleChange}> */}
-      <select>
-        <option>All</option> 
-        {singers.map(item=> <option>{item}</option>)}
-      </select>
+      <Filter data={singers}/>
+      <Filter data={ganres}/>
+      <Filter data={years}/>
+      <AudioList audioListData={soundList}/>
     </div>
   );
 }
