@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.a2c4c786.chunk.css",
-    "main.js": "/static/js/main.53ec51aa.chunk.js",
-    "main.js.map": "/static/js/main.53ec51aa.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d5963870.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d5963870.js.map",
-    "static/js/2.52593c28.chunk.js": "/static/js/2.52593c28.chunk.js",
-    "static/js/2.52593c28.chunk.js.map": "/static/js/2.52593c28.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.c18fed66e7c85e582a63229f3d21ba0a.js": "/precache-manifest.c18fed66e7c85e582a63229f3d21ba0a.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.a2c4c786.chunk.css.map": "/static/css/main.a2c4c786.chunk.css.map",
-    "static/js/2.52593c28.chunk.js.LICENSE.txt": "/static/js/2.52593c28.chunk.js.LICENSE.txt"
+    "main.css": "/audioteka/static/css/main.a2c4c786.chunk.css",
+    "main.js": "/audioteka/static/js/main.79c49f59.chunk.js",
+    "main.js.map": "/audioteka/static/js/main.79c49f59.chunk.js.map",
+    "runtime-main.js": "/audioteka/static/js/runtime-main.941cb39a.js",
+    "runtime-main.js.map": "/audioteka/static/js/runtime-main.941cb39a.js.map",
+    "static/js/2.52593c28.chunk.js": "/audioteka/static/js/2.52593c28.chunk.js",
+    "static/js/2.52593c28.chunk.js.map": "/audioteka/static/js/2.52593c28.chunk.js.map",
+    "index.html": "/audioteka/index.html",
+    "precache-manifest.25a70be926025f6a36bfa4ae23582fa9.js": "/audioteka/precache-manifest.25a70be926025f6a36bfa4ae23582fa9.js",
+    "service-worker.js": "/audioteka/service-worker.js",
+    "static/css/main.a2c4c786.chunk.css.map": "/audioteka/static/css/main.a2c4c786.chunk.css.map",
+    "static/js/2.52593c28.chunk.js.LICENSE.txt": "/audioteka/static/js/2.52593c28.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d5963870.js",
+    "static/js/runtime-main.941cb39a.js",
     "static/js/2.52593c28.chunk.js",
     "static/css/main.a2c4c786.chunk.css",
-    "static/js/main.53ec51aa.chunk.js"
+    "static/js/main.79c49f59.chunk.js"
   ]
 }
