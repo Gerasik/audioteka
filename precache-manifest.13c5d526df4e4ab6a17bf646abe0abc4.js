@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cb2369d3f40cdc7289224ca69c3507ce",
+    "revision": "d31ffafdf49fe8470851193f1f65250d",
     "url": "/audioteka/index.html"
   },
   {
