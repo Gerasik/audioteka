@@ -1,38 +1,10 @@
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import styles from './App.module.scss';
 import AudioList from './components/AudioList/AudioList';
 import Filter from './components/Filter/Filter';
+import Control from './components/Control/Control';
 import soundList from './data/csvjson.json';
-
-// function App() {
-//   function getUnique(arr, attr) {
-//     const result = [];
-//     for (const str of arr) {
-//       if (!result.includes(str[attr])) {
-//         result.push(str[attr]);
-//       }
-//     }
-//     return result.sort();
-//   }
-//   const singers = getUnique(soundList, 'singer');
-//   const ganres = getUnique(soundList, 'ganre');
-//   const years = getUnique(soundList, 'year');
-//   return (
-//     <div className={styles.main}>
-//       <AudioList audioListData={soundList} />
-//       <div className={styles.filters}>
-//         <p>Singer:</p>
-//         <Filter data={singers} />
-//         <p>Ganre:</p>
-//         <Filter data={ganres} />
-//         <p>Year:</p>
-//         <Filter data={years} />
-//       </div>
-//     </div>
-//   );
-// }
 
 class App extends Component {
   constructor(props) {
@@ -40,21 +12,23 @@ class App extends Component {
 
     this.state = {
       currentList: soundList,
-      sortby: {
-        type: null,
-        order: null,
-      },
       sort: null,
+      curentPage: 1,
+      listSize: 5,
     };
   }
 
-  filterByType(event) {
-    if (event.target.value === 'All') {
-      this.setState({ currentList: soundList });
-    } else {
-      const newList = soundList.filter((item) => `${item[event.target.name]}` === event.target.value);
-      this.setState({ currentList: newList });
+  static getUnique(attr) {
+    const result = [];
+    for (const str of soundList) {
+      if (!result.includes(str[attr])) {
+        result.push(str[attr]);
+      }
     }
+    return result.sort().map((item, id) => ({
+      id,
+      item,
+    }));
   }
 
   sortAction(event) {
@@ -77,7 +51,6 @@ class App extends Component {
         break;
     }
     const { currentList, sort } = this.state;
-    // let sortedList;
     if (sortBy !== sort) {
       const sortedList = currentList.sort((a, b) => {
         const textA = a[sortBy];
@@ -93,34 +66,66 @@ class App extends Component {
     }
   }
 
-  render() {
-    function getUnique(arr, attr) {
-      const result = [];
-      for (const str of arr) {
-        if (!result.includes(str[attr])) {
-          result.push(str[attr]);
-        }
-      }
-      return result.sort().map((item, id) => ({
-        id,
-        item,
-      }));
+  filterByType(event) {
+    if (event.target.value === 'All') {
+      this.setState({ currentList: soundList });
+    } else {
+      const newList = soundList.filter((item) => `${item[event.target.name]}` === event.target.value);
+      this.setState({ currentList: newList });
     }
-    const singers = getUnique(soundList, 'singer');
-    const ganres = getUnique(soundList, 'ganre');
-    const years = getUnique(soundList, 'year');
-    const { currentList } = this.state;
+  }
+
+  changeListSize(e) {
+    this.setState({ listSize: +e.target.innerText });
+  }
+
+  changePage(e) {
+    const { currentList, listSize } = this.state;
+    switch (e.target.innerText) {
+      case 'First':
+        this.setState({ curentPage: 1 });
+        break;
+      case 'Last':
+        this.setState({ curentPage: Math.ceil(currentList.length / listSize) });
+        break;
+      default:
+        this.setState({ curentPage: +e.target.innerText });
+        break;
+    }
+  }
+
+  render() {
+    const singers = this.constructor.getUnique('singer');
+    const ganres = this.constructor.getUnique('ganre');
+    const years = this.constructor.getUnique('year');
+    const { currentList, curentPage, listSize } = this.state;
     return (
       <div className={styles.main}>
-        <AudioList audioListData={currentList} sortAction={(e) => this.sortAction(e)} />
-        <div className={styles.filters}>
-          <p>Singer:</p>
-          <Filter name="singer" data={singers} action={(e) => this.filterByType(e)} />
-          <p>Ganre:</p>
-          <Filter name="ganre" data={ganres} action={(e) => this.filterByType(e)} />
-          <p>Year:</p>
-          <Filter name="year" data={years} action={(e) => this.filterByType(e)} />
+        <div className={styles.wrap}>
+          <AudioList
+            audioListData={currentList}
+            curentPage={curentPage}
+            listSize={listSize}
+            sortAction={(e) => this.sortAction(e)}
+          />
+          <div className={styles.filters}>
+            <p>Singer:</p>
+            <Filter name="singer" data={singers} action={(e) => this.filterByType(e)} />
+            <p>Ganre:</p>
+            <Filter name="ganre" data={ganres} action={(e) => this.filterByType(e)} />
+            <p>Year:</p>
+            <Filter name="year" data={years} action={(e) => this.filterByType(e)} />
+          </div>
         </div>
+        <Control
+          curentPage={curentPage}
+          listSize={listSize}
+          pagesSize={
+            new Array(Math.ceil(currentList.length / listSize)).fill(1).map((i, id) => id + i)
+          }
+          changeListSize={(e) => this.changeListSize(e)}
+          changePage={(e) => this.changePage(e)}
+        />
       </div>
     );
   }
